@@ -47,12 +47,17 @@ class Profile(BaseModel):
     is_check = models.BooleanField(default=False)
 
 
-class Followers(BaseModel):
+class BaseUser(BaseModel):
     from_profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
     to_profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+
+
+class Followers(BaseModel):
     is_confirm = models.BooleanField(default=True)
 
 
-class Following(BaseModel):
-    from_profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
-    to_profile = models.ForeignKey(Profile, on_delete=models.CASCADE)
+class Following(BaseUser):
+    pass
+
+
+

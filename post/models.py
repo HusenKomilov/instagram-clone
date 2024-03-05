@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from django.core.validators import FileExtensionValidator
 from utils.models import BaseModel
-from users.models import User
+from users.models import User, BaseUser
 
 
 class Location(BaseModel):
@@ -50,3 +50,10 @@ class Archive(BaseModel):
     story = models.ForeignKey(Story, on_delete=models.CASCADE, related_name="archive_story")
     user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name="archive_user")
 
+
+class Chat(BaseUser):
+    chat = models.TextField()
+    file = models.FileField(upload_to='chat/',
+                            validators=[
+                                FileExtensionValidator(allowed_extensions=['mp3', 'mp4', 'jpg', 'jpeg', 'png'])])
+    
